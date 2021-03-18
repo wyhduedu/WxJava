@@ -125,8 +125,8 @@ public class WxCpTpXmlMessage implements Serializable {
   protected Integer order;
 
   @XStreamAlias("TagId")
-  @XStreamConverter(value = IntConverter.class)
-  protected Integer tagId;
+  @XStreamConverter(value = XStreamCDataConverter.class)
+  protected String tagId;
 
   @XStreamAlias("AddUserItems")
   @XStreamConverter(value = StringArrayConverter.class)

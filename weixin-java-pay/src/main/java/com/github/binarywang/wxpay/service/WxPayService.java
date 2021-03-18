@@ -11,10 +11,10 @@ import com.github.binarywang.wxpay.config.WxPayConfig;
 import com.github.binarywang.wxpay.constant.WxPayConstants;
 import com.github.binarywang.wxpay.exception.WxPayException;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
 
 import java.io.File;
 import java.io.InputStream;
-import java.net.URI;
 import java.util.Date;
 import java.util.Map;
 
@@ -90,13 +90,23 @@ public interface WxPayService {
   String postV3(String url, HttpPost httpPost) throws WxPayException;
 
   /**
+   * 发送http请求，得到响应字符串.
+   *
+   * @param url      请求地址
+   * @param httpRequest 请求信息，可以是put，post，get，delete等请求
+   * @return 返回请求结果字符串 string
+   * @throws WxPayException the wx pay exception
+   */
+  String requestV3(String url, HttpRequestBase httpRequest) throws WxPayException;
+
+  /**
    * 发送get V3请求，得到响应字符串.
    *
    * @param url 请求地址
    * @return 返回请求结果字符串 string
    * @throws WxPayException the wx pay exception
    */
-  String getV3(URI url) throws WxPayException;
+  String getV3(String url) throws WxPayException;
 
   /**
    * 发送下载 V3请求，得到响应流.
@@ -105,7 +115,7 @@ public interface WxPayService {
    * @return 返回请求响应流 input stream
    * @throws WxPayException the wx pay exception
    */
-  InputStream downloadV3(URI url) throws WxPayException;
+  InputStream downloadV3(String url) throws WxPayException;
 
   /**
    * 获取企业付款服务类.
@@ -144,11 +154,32 @@ public interface WxPayService {
   EcommerceService getEcommerceService();
 
   /**
+   * 获取微信支付智慧商圈服务类
+   *
+   * @return the business circle service
+   */
+  BusinessCircleService getBusinessCircleService();
+
+  /**
    * 获取微信支付通用媒体服务类
    *
    * @return the merchant media service
    */
   MerchantMediaService getMerchantMediaService();
+
+  /**
+   * 获取微信支付营销媒体服务类
+   *
+   * @return the marketing media service
+   */
+  MarketingMediaService getMarketingMediaService();
+
+  /**
+   * 获取微信支付营销代金券服务类
+   *
+   * @return the marketing favor service
+   */
+  MarketingFavorService getMarketingFavorService();
 
   /**
    * 设置企业付款服务类，允许开发者自定义实现类.
