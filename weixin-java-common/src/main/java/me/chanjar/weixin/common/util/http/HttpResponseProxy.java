@@ -60,7 +60,6 @@ public class HttpResponseProxy {
     if (contentDispositionHeader == null || contentDispositionHeader.length == 0) {
       throw new WxErrorException("无法获取到文件名，Content-disposition为空");
     }
-
     return this.extractFileNameFromContentString(contentDispositionHeader[0].getValue());
   }
 
